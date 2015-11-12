@@ -90,6 +90,33 @@ angular.module('starter.controllers', [])
 
 })
 
+.controller('NuevoUsuarioCtrl', function($scope, $stateParams, $http, $ionicPopup, $location ) {
+  
+    $scope.user={};
+        $scope.user.picture='';
+        $scope.user.name='';
+        $scope.user.email='';
+        $scope.user.id =''; 
+  
+   $scope.doRegister = function() {
+      $http.post('http://api-geoalquiler.herokuapp.com/usuarios',$scope.user ).then(function(resp) {
+        console.log(resp.data);
+         var alertPopup = $ionicPopup.alert({
+             title: 'Usuario Creado con exito',
+             template: 'Ingresa ahora'
+           });
+           alertPopup.then(function(res) {
+             $location.path('/app/usuarios');
+           });
+          
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+    };
+  
+})
+
 .controller('AvisoslistsCtrl', function($scope, $http) {
 
   $scope.avisos = [];
@@ -136,4 +163,31 @@ angular.module('starter.controllers', [])
     });
   };
 
+})
+
+
+.controller('NuevoAvisoCtrl', function($scope, $stateParams, $http, $ionicPopup, $location ) {
+  
+    $scope.anuncios={};
+        $scope.anuncios.titulo='';
+        $scope.anuncios.descripcion='';
+        $scope.anuncios.precio='';
+  
+   $scope.doRegister = function() {
+      $http.post('http://api-geoalquiler.herokuapp.com/anuncios',$scope.anuncios ).then(function(resp) {
+        console.log(resp.data);
+         var alertPopup = $ionicPopup.alert({
+             title: 'Anuncio Creado con exito',
+             template: 'Vea su anuncion publicado'
+           });
+           alertPopup.then(function(res) {
+             $location.path('/app/avisos');
+           });
+          
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+    };
+  
 });
