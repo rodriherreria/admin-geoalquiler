@@ -130,9 +130,19 @@ angular.module('starter.controllers', [])
 })
 
 .controller('NuevoUsuarioCtrl', function($scope, $stateParams, $http, $ionicPopup, $location ) {
-  
-
-    $scope.user={};
+    
+      $scope.user = [];
+    $http.get('http://api-geoalquiler.herokuapp.com/index.php/me', {withCredentials: true}).then(function(resp) {
+      $scope.user = resp.data.data;
+      console.log('Succes', resp.data.data);
+      $location.path('/app/nuevousuario');
+    }, function(err) {
+      console.error('ERR', err);
+      $location.path('/app/entrar');
+      // err.status will contain the status code
+    });
+        
+        $scope.user={};
         $scope.user.picture='';
         $scope.user.name='';
         $scope.user.email='';
@@ -159,8 +169,18 @@ angular.module('starter.controllers', [])
 
 .controller('AvisoslistsCtrl', function($scope, $http) {
 
+   $scope.user = [];
+    $http.get('http://api-geoalquiler.herokuapp.com/index.php/me', {withCredentials: true}).then(function(resp) {
+      $scope.user = resp.data.data;
+      console.log('Succes', resp.data.data);
+      $location.path('/app/avisos');
+    }, function(err) {
+      console.error('ERR', err);
+      $location.path('/app/entrar');
+      // err.status will contain the status code
+    });
 
-
+  
   $scope.avisos = [];
    $scope.$on('$ionicView.beforeEnter', function() {
   $http.get('http://api-geoalquiler.herokuapp.com/index.php/anuncios').then(function(resp) {
@@ -174,8 +194,6 @@ angular.module('starter.controllers', [])
 })
 
 .controller('AvisoCtrl', function($scope, $stateParams, $http, $location) {
-
-
 
   $scope.aviso = {};
 
@@ -212,9 +230,18 @@ angular.module('starter.controllers', [])
 
 .controller('NuevoAvisoCtrl', function($scope, $stateParams, $http, $ionicPopup, $location ) {
 
-
+    $scope.user = [];
+    $http.get('http://api-geoalquiler.herokuapp.com/index.php/me', {withCredentials: true}).then(function(resp) {
+      $scope.user = resp.data.data;
+      console.log('Succes', resp.data.data);
+      $location.path('/app/nuevoaviso');
+    }, function(err) {
+      console.error('ERR', err);
+      $location.path('/app/entrar');
+      // err.status will contain the status code
+    });
   
-    $scope.anuncios={};
+        $scope.anuncios={};
         $scope.anuncios.titulo='';
         $scope.anuncios.descripcion='';
         $scope.anuncios.precio='';
