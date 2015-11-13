@@ -32,11 +32,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.entrar', {
+    url: '/entrar',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/entrar.html',
+        controller: 'EntrarCtrl'
       }
     }
   })
@@ -50,6 +51,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
   .state('app.usuario', {
     url: '/usuarios/:UsuarioId',
     views: {
@@ -98,5 +100,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }) ;
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/usuarios');
+  $urlRouterProvider.otherwise('/app/entrar');
 });

@@ -22,10 +22,10 @@
   <div class="card">
   <div class="item item-text-wrap">
     <h1>Tipo de usuario</h1>
-    <button ng-click="doSave()" class="button button-balanced">
+    <button ng-click="doFree()" value=1 ng-model="usuariotipo.tipo" class="button button-balanced">
       Free
     </button>
-    <button class="button button-assertive">
+    <button ng-click="doPremiun()" value=2 ng-model="usuariotipo.tipo" class="button button-assertive">
       Premium
     </button>
   </div>
