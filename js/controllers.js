@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
 
    $scope.doLogout = function(){
     $http.get('http://api-geoalquiler.herokuapp.com/logout', {withCredentials: true}).then(function(resp) {
@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
       console.error('ERR', err);
       // err.status will contain the status code
     });
-
+    }
 })
 
 .controller('EntrarCtrl', function($scope, $stateParams, $http, $ionicPopup, $location ) {
