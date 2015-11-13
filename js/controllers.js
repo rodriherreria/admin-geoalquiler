@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $location) {
 
    $scope.doLogout = function(){
     $http.get('http://api-geoalquiler.herokuapp.com/logout', {withCredentials: true}).then(function(resp) {
