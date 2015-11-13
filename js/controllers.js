@@ -2,6 +2,16 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
+   $scope.doLogout = function(){
+    $http.get('http://api-geoalquiler.herokuapp.com/logout', {withCredentials: true}).then(function(resp) {
+    $scope.user = resp.data.data;
+    $location.path('/app/entrar');
+
+    }, function(err) {
+      console.error('ERR', err);
+      // err.status will contain the status code
+    });
+
 })
 
 .controller('EntrarCtrl', function($scope, $stateParams, $http, $ionicPopup, $location ) {
@@ -20,15 +30,6 @@ angular.module('starter.controllers', [])
            alertPopup.then(function(res) {
              $location.path('/app/usuarios');
            });
-     /* $http.post('http://api-geoalquiler.herokuapp.com/login',$scope.user ).then(function(resp) {
-        console.log(resp.data);
-         var alertPopup = $ionicPopup.alert({
-             title: 'Logeado con exito',
-             template: 'Ingresa ahora'
-           });
-           alertPopup.then(function(res) {
-             $location.path('/app/usuarios');
-           });*/
           
     }, function(err) {
       console.error('ERR', err);
