@@ -11,7 +11,7 @@ angular.module('starter.controllers', [])
         $scope.user.password =''; 
   
    $scope.doLogin = function() {
-      $http.post('http://api-geoalquiler.herokuapp.com/login',$scope.user ).then(function(resp) {
+    $http.post('http://api-geoalquiler.herokuapp.com/login',$scope.user, {withCredentials: true}).then(function(resp) {
         console.log(resp.data);
          var alertPopup = $ionicPopup.alert({
              title: 'Logeado con exito',
@@ -20,6 +20,15 @@ angular.module('starter.controllers', [])
            alertPopup.then(function(res) {
              $location.path('/app/usuarios');
            });
+     /* $http.post('http://api-geoalquiler.herokuapp.com/login',$scope.user ).then(function(resp) {
+        console.log(resp.data);
+         var alertPopup = $ionicPopup.alert({
+             title: 'Logeado con exito',
+             template: 'Ingresa ahora'
+           });
+           alertPopup.then(function(res) {
+             $location.path('/app/usuarios');
+           });*/
           
     }, function(err) {
       console.error('ERR', err);
@@ -38,9 +47,8 @@ angular.module('starter.controllers', [])
 
 .controller('UsuarioslistsCtrl', function($scope, $http, $location) {
          
-    
-    $scope.user = [];
-    $http.get('http://api-geoalquiler.herokuapp.com/index.php/me').then(function(resp) {
+     $scope.user = [];
+    $http.get('http://api-geoalquiler.herokuapp.com/index.php/me', {withCredentials: true}).then(function(resp) {
       $scope.user = resp.data.data;
       console.log('Succes', resp.data.data);
       $location.path('/app/usuarios');
@@ -48,13 +56,8 @@ angular.module('starter.controllers', [])
       console.error('ERR', err);
       $location.path('/app/entrar');
       // err.status will contain the status code
-    }); /*var alertPopup = $ionicPopup.alert({
-             title: 'Tienes que logearte',
-             template: 'Se nuestro amigo'
-           });
-           alertPopup.then(function(res) {
-             $location.path('/app/entrar');
-           });*/ 
+    });
+
 
   $scope.usuarios = [];
    $scope.$on('$ionicView.beforeEnter', function() {
